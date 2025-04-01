@@ -1,7 +1,7 @@
 import "./hero.scss";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter, faGithub, faFacebook, faLinkedin, faHashnode } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faGithub, faFacebook, faLinkedin, faHashnode, } from "@fortawesome/free-brands-svg-icons";
 
 const textVariants = {
   initial: {
@@ -116,8 +116,23 @@ const Hero = () => {
         >
           <FontAwesomeIcon icon={faHashnode} size="2x" />
         </motion.a>
+
+      {/* Leetcode */}
         <motion.a
-        href="https://drive.google.com/file/d/1DDM_g1YbylTEe4jdXpu4DdEeDqu990hU/view?usp=sharing" // The link to redirect
+        href="https://leetcode.com/u/Arnav_07/"
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.2 }}
+        style={{ color: "#1877F2" }}
+>
+  <img
+    src="/public/leetcode.png" // Replace with the actual path to your .png file
+    alt="Leetcode"
+    style={{ width: '40px', height: '40px' }} // Adjust the size as needed
+  />
+</motion.a>
+        <motion.a
+        href="https://drive.google.com/drive/folders/1dUvFdaSnas69JPCZcWFSWDk0WNCcvSNH?usp=sharing" // The link to redirect
         target="_blank"
         rel="noopener noreferrer"
         className="redirect-link"

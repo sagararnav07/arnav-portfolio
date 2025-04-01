@@ -13,7 +13,7 @@ const Navbar = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          Arnav Dev
+          Sagar_Arnav.dev
         </motion.span>
         
           
