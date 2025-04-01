@@ -126,7 +126,7 @@ const Hero = () => {
         style={{ color: "#1877F2" }}
 >
   <img
-    src="/public/leetcode.png" // Replace with the actual path to your .png file
+    src="/leetcode.png" // Replace with the actual path to your .png file
     alt="Leetcode"
     style={{ width: '40px', height: '40px' }} // Adjust the size as needed
   />
