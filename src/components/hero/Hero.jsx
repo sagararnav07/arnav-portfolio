@@ -124,12 +124,28 @@ const Hero = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.2 }}
         style={{ color: "#1877F2" }}
->
+        >
   <img
     src="/leetcode.png" // Replace with the actual path to your .png file
     alt="Leetcode"
     style={{ width: '40px', height: '40px' }} // Adjust the size as needed
   />
+     </motion.a>
+  {/* Leetcode */}
+  <motion.a
+        href="https://www.geeksforgeeks.org/user/arnav07n1nj/"
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.2 }}
+        style={{ color: "#1877F2" }}
+>
+  <img
+    src="/geeksforgeeks.png" // Replace with the actual path to your .png file
+    alt="GeeksforGeeks"
+    style={{ width: '50px', height: '40px' }} // Adjust the size as needed
+  />
+     
+     
 </motion.a>
         <motion.a
         href="https://drive.google.com/drive/folders/1dUvFdaSnas69JPCZcWFSWDk0WNCcvSNH?usp=sharing" // The link to redirect
