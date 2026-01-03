@@ -25,6 +25,13 @@ section {
   width: 100vw;
   scroll-snap-align: center;
   overflow: hidden;
+
+  &#Skills {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    scroll-snap-align: start;
+  }
 }
 
 @mixin mobile {

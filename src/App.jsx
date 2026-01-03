@@ -31,7 +31,7 @@ const App = () => {
       </section>
 
       <section id="Skills">
-          <Skills type = "Skills"/>
+        <Skills />
       </section>
      
      
