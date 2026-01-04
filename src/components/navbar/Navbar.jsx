@@ -8,13 +8,15 @@ const Navbar = () => {
       {/* Sidebar */}
       <Sidebar/>
       <div className="wrapper">
-        <motion.span
+        <motion.div
+          className="logo"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          Sagar_Arnav.dev
-        </motion.span>
+          <img src="/favicon.svg" alt="Logo" className="logo-image" />
+          <span>_Arnav.dev</span>
+        </motion.div>
         
           
         </div>

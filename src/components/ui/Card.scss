@@ -1,0 +1,46 @@
+.card {
+  background: rgba(20, 20, 45, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Padding variants
+  &--small {
+    padding: 16px;
+  }
+
+  &--normal {
+    padding: 24px;
+  }
+
+  &--large {
+    padding: 32px;
+  }
+
+  // Style variants
+  &--default {
+    background: rgba(20, 20, 45, 0.6);
+  }
+
+  &--gradient {
+    background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(15, 15, 35, 0.9));
+  }
+
+  &--outlined {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  // Hover effect
+  &--hover {
+    cursor: pointer;
+
+    &:hover {
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(139, 92, 246, 0.1);
+    }
+  }
+}

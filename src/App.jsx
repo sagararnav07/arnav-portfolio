@@ -1,49 +1,53 @@
-import Test from "./Test";
 import "./app.scss";
 import Contact from "./components/contact/Contact";
 import Cursor from "./components/cursor/Cursor";
 import Hero from "./components/hero/Hero";
-import Navbar from "./components/navbar/Navbar";
+import Sidebar from "./components/layout/Sidebar";
 import Parallax from "./components/parallax/Parallax";
 import Skills from "./components/Skills/Skills";
 import Portfolio from "./components/portfolio/Portfolio";
 import Services from "./components/services/Services";
+import Blog from "./components/blog/Blog";
 
 const App = () => {
   return (
-    <div>
+    <div className="app-container">
       <Cursor />
-      <section id="About Me">
-        <Navbar />
-        <Hero />
-      </section>
+      <Sidebar />
+      
+      <main className="main-content">
+        <section id="about">
+          <Hero />
+        </section>
 
-      <section id="Services">
-        <Parallax type="services" />
-      </section>
+        <section className="parallax-section">
+          <Parallax type="services" />
+        </section>
 
-      <section>
-        <Services />
-      </section>
+        <section id="experience">
+          <Services />
+        </section>
 
-      <section id="Portfolio">
-        <Parallax type="portfolio" />
-      </section>
+        <section className="parallax-section">
+          <Parallax type="portfolio" />
+        </section>
 
-      <section id="Skills">
-        <Skills />
-      </section>
-     
-     
-      <Portfolio />
-     
+        <section id="skills">
+          <Skills />
+        </section>
 
-      <section id="Contact">
-        <Contact />
-      </section>
-      {/* Framer Motion Crash Course */}
-      {/* <Test/>
-    <Test/> */}
+        <section id="portfolio">
+          <Portfolio />
+        </section>
+
+        <section id="blog">
+          <Blog />
+        </section>
+
+        <section id="contact">
+          <Contact />
+        </section>
+      </main>
     </div>
   );
 };

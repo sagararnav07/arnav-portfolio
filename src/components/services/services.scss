@@ -1,120 +1,183 @@
 @import "../../app.scss";
 
-.experience {
-  padding: 20px;
-  font-family: 'Roboto', sans-serif; /* Use a modern, clean font */
-  
-  @include mobile {
-    padding: 10px;
-  }
+.experience-section {
+  padding: 0;
+  min-height: auto !important;
+  height: auto !important;
 }
 
-.textContainer .sectionTitle {
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 20px;
-
-  @include mobile {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
+.experience-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
 }
 
-.experienceContainer {
-  margin-top: 20px;
-
-  @include mobile {
-    margin-top: 15px;
-  }
+.experience-column {
+  display: flex;
+  flex-direction: column;
 }
 
-.experienceItem {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  border-left: 5px solid #ffa500;
-  
-  @include mobile {
-    padding: 15px;
-    margin-bottom: 10px;
-  }
-}
-
-.experienceHeader {
+.column-header {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-  @include mobile {
-    flex-direction: column;
-    align-items: flex-start;
+  .column-icon {
+    font-size: 20px;
+    color: #8b5cf6;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
   }
 }
 
-.companyLogo {
-  width: 100px;
-  height: 100px;
-  margin-right: 15px;
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 
-  @include mobile {
-    width: 60px;
-    height: 60px;
-    margin-right: 0;
-    margin-bottom: 10px;
+.timeline-item {
+  display: flex;
+  gap: 20px;
+}
+
+.timeline-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+
+    &--education {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+  }
+
+  .timeline-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.5), transparent);
+    margin-top: 8px;
   }
 }
 
-.jobTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
+.timeline-card {
+  flex: 1;
+  background: rgba(20, 20, 45, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
 
-  @include mobile {
-    font-size: 1.3rem;
+  &:hover {
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   }
 }
 
-.companyName {
-  font-size: 1.2rem;
-  color: #666;
+.card-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
 
-  @include mobile {
-    font-size: 1rem;
+  .company-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px;
+    flex-shrink: 0;
   }
 }
 
-.duration {
-  font-size: 1rem;
-  color: #999;
+.card-info {
+  flex: 1;
+}
 
-  @include mobile {
-    font-size: 0.9rem;
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.card-company {
+  font-size: 14px;
+  color: #8b5cf6;
+  margin-bottom: 8px;
+}
+
+.card-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .card-period,
+  .card-location {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .card-period {
+    position: relative;
+    padding-right: 16px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+    }
   }
 }
 
-.experienceDetails {
-  list-style-type: disc;
-  padding-left: 20px;
-  font-style: italic;
-  color: #666;
-  font-weight: 900;
+.card-description {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-  @include mobile {
-    padding-left: 15px;
+  li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
 
-  }
-}
-
-.experienceDetails li {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 10px;
-
-  @include mobile {
-    font-size: 0.7rem;
-    line-height: 1.4;
-    margin-bottom: 8px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      background: rgba(139, 92, 246, 0.6);
+      border-radius: 50%;
+    }
   }
 }
