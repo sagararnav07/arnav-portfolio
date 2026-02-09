@@ -2,15 +2,13 @@ import { useRef } from "react";
 import "./parallax.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// Define the tech stack with the logos you mentioned
-
-
 const Parallax = ({ type }) => {
   const ref = useRef();
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
+    layoutEffect: false,
   });
 
   const yText = useTransform(scrollYProgress, [0, 1], ["0%", "500%"]);

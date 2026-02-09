@@ -1,14 +1,71 @@
 @import "../../app.scss";
 
-.cursor{
-  width: 50px;
-  height: 50px;
+/* ─── Outer ring ─── */
+.cursor-ring {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 1px solid white;
+  border: 1.5px solid rgba(139, 92, 246, 0.5);
   position: fixed;
-  z-index: 999;
+  top: 0;
+  left: 0;
+  z-index: 99998;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  mix-blend-mode: difference;
 
-  @include mobile{
+  &--hover {
+    width: 60px;
+    height: 60px;
+    background: rgba(139, 92, 246, 0.08);
+    border-color: rgba(139, 92, 246, 0.8);
+  }
+
+  &--click {
+    width: 34px;
+    height: 34px;
+    border-color: #06b6d4;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.cursor-ring__text {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+/* ─── Inner dot ─── */
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  pointer-events: none;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+
+  &--hover {
+    width: 4px;
+    height: 4px;
+    opacity: 0.5;
+  }
+
+  @include mobile {
     display: none;
   }
 }

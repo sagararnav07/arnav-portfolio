@@ -1,0 +1,68 @@
+@import "../../app.scss";
+
+/* ─── Top progress bar ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981);
+  transform-origin: left;
+  z-index: 9999;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+/* ─── Circular indicator (bottom-left) ─── */
+.scroll-progress__indicator {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  width: 42px;
+  height: 42px;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mobile {
+    width: 36px;
+    height: 36px;
+    bottom: 18px;
+    left: 18px;
+  }
+}
+
+.scroll-progress__ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.scroll-progress__ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 2.5;
+}
+
+.scroll-progress__ring-fill {
+  fill: none;
+  stroke: url(#progressGradient);
+  stroke: #8b5cf6;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.15s ease;
+}
+
+.scroll-progress__value {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+
+  @include mobile {
+    font-size: 8px;
+  }
+}

@@ -1,41 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaCertificate, FaAward, FaCode, FaCheckCircle } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaCertificate, FaAward, FaCheckCircle } from 'react-icons/fa';
 import SectionHeader from '../ui/SectionHeader';
 import './portfolio.scss';
 
 const portfolioItems = [
-  // Projects
-  {
-    id: 1,
-    type: 'project',
-    title: "Horizon Banking Application",
-    description: "Full-stack banking application with secure authentication, real-time transactions, and account management.",
-    image: "/Horizon-Banking-Application.png",
-    tags: ["Next.js", "TypeScript", "MongoDB", "AWS"],
-    github: "https://github.com/sagararnav07/banking-Horizon",
-  },
-  {
-    id: 2,
-    type: 'project',
-    title: "WhatsApp Chat Analyzer",
-    description: "AI-powered sentiment analysis tool for WhatsApp conversations using machine learning.",
-    image: "/Whatsapp Bot Webchat Analyzer.png",
-    tags: ["Python", "ML", "Pandas", "Matplotlib"],
-    github: "https://github.com/sagararnav07/Whatsapp_chat_sentiment_analysis",
-  },
-  {
-    id: 3,
-    type: 'project',
-    title: "ChatGPT Clone",
-    description: "Conversational AI chatbot powered by OpenAI API with contextual understanding.",
-    image: "/CHAT GPT CLONE.png",
-    tags: ["React", "OpenAI API", "Node.js"],
-    github: "https://github.com/sagararnav07/ChatGPT-clone",
-  },
   // Certifications
   {
-    id: 4,
+    id: 1,
     type: 'certification',
     title: "HackerRank Problem Solving (Basic)",
     description: "Certified in fundamental problem solving skills including data structures, algorithms, and logical thinking.",
@@ -45,7 +17,7 @@ const portfolioItems = [
     verifyLink: "https://www.hackerrank.com/certificates/a8b1cbae3fef",
   },
   {
-    id: 5,
+    id: 2,
     type: 'certification',
     title: "HackerRank Problem Solving (Intermediate)",
     description: "Certified in intermediate problem solving skills including HashMaps, stacks, queues, and optimal algorithm design.",
@@ -55,7 +27,7 @@ const portfolioItems = [
     verifyLink: "https://www.hackerrank.com/certificates/9515d1245b24",
   },
   {
-    id: 6,
+    id: 3,
     type: 'certification',
     title: "HackerRank Python (Basic)",
     description: "Certified in Python fundamentals including scalar types, operators, control flow, strings, collections, and OOP concepts.",
@@ -65,7 +37,7 @@ const portfolioItems = [
     verifyLink: "https://www.hackerrank.com/skills-verification/python_basic",
   },
   {
-    id: 7,
+    id: 4,
     type: 'certification',
     title: "HackerRank JavaScript (Basic)",
     description: "Certified in JavaScript fundamentals including functions, currying, hoisting, scope, inheritance, and error handling.",
@@ -75,7 +47,7 @@ const portfolioItems = [
     verifyLink: "https://www.hackerrank.com/skills-verification/javascript_basic",
   },
   {
-    id: 8,
+    id: 5,
     type: 'certification',
     title: "HackerRank SQL (Basic)",
     description: "Certified in SQL fundamentals including simple queries, relationships, and aggregators.",
@@ -85,7 +57,7 @@ const portfolioItems = [
     verifyLink: "https://www.hackerrank.com/skills-verification/sql_basic",
   },
   {
-    id: 9,
+    id: 6,
     type: 'certification',
     title: "HackerRank React (Basic)",
     description: "Certified in React fundamentals including routing, rendering elements, state management, and form validation.",
@@ -96,7 +68,7 @@ const portfolioItems = [
   },
   // Badges
   {
-    id: 10,
+    id: 7,
     type: 'badge',
     title: "GitHub Arctic Code Vault",
     description: "Contributed code to the 2020 GitHub Archive Program.",
@@ -107,7 +79,6 @@ const portfolioItems = [
 
 const tabs = [
   { id: 'all', label: 'All', icon: null },
-  { id: 'project', label: 'Projects', icon: <FaCode /> },
   { id: 'certification', label: 'Certifications', icon: <FaCertificate /> },
   { id: 'badge', label: 'Badges', icon: <FaAward /> },
 ];

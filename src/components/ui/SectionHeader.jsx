@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import TextScramble from '../textscramble/TextScramble';
 import './SectionHeader.scss';
 
 const SectionHeader = ({ title, subtitle, align = 'left' }) => {
@@ -12,7 +13,7 @@ const SectionHeader = ({ title, subtitle, align = 'left' }) => {
       transition={{ duration: 0.5 }}
     >
       <h2 className="section-title">
-        {title}
+        <TextScramble text={title} as="span" speed={25} scrambleDuration={800} />
         <motion.span 
           className="title-underline"
           initial={{ width: 0 }}

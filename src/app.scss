@@ -1,5 +1,21 @@
 html {
-  scroll-behavior: smooth;
+  // scroll-behavior handled by Lenis smooth scroll
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 * {
@@ -59,6 +75,14 @@ section {
     height: 100vh;
     min-height: 100vh;
     overflow: hidden;
+    // Break out of sidebar margin to go full-width
+    margin-left: -80px;
+    width: calc(100% + 80px);
+
+    @media (max-width: 738px) {
+      margin-left: -60px;
+      width: calc(100% + 60px);
+    }
   }
 
   &#experience {
