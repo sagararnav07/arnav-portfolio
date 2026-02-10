@@ -1,22 +1,25 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, lazy, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
 import "./app.scss";
-import Contact from "./components/contact/Contact";
-import Cursor from "./components/cursor/Cursor";
-import Hero from "./components/hero/Hero";
-import Sidebar from "./components/layout/Sidebar";
-import Parallax from "./components/parallax/Parallax";
-import Skills from "./components/Skills/Skills";
-import Portfolio from "./components/portfolio/Portfolio";
-import Projects from "./components/projects/Projects";
-import Services from "./components/services/Services";
-import Blog from "./components/blog/Blog";
-import Terminal from "./components/terminal/Terminal";
-import CommandPalette from "./components/commandpalette/CommandPalette";
 import Preloader from "./components/preloader/Preloader";
-import ParticleBackground from "./components/particles/ParticleBackground";
-import SmoothScroll from "./components/smoothscroll/SmoothScroll";
-import ScrollProgress from "./components/scrollprogress/ScrollProgress";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+// Lazy-load heavy components to reduce initial bundle size
+const Contact = lazy(() => import("./components/contact/Contact"));
+const Cursor = lazy(() => import("./components/cursor/Cursor"));
+const Hero = lazy(() => import("./components/hero/Hero"));
+const Sidebar = lazy(() => import("./components/layout/Sidebar"));
+const Parallax = lazy(() => import("./components/parallax/Parallax"));
+const Skills = lazy(() => import("./components/Skills/Skills"));
+const Portfolio = lazy(() => import("./components/portfolio/Portfolio"));
+const Projects = lazy(() => import("./components/projects/Projects"));
+const Services = lazy(() => import("./components/services/Services"));
+const Blog = lazy(() => import("./components/blog/Blog"));
+const Terminal = lazy(() => import("./components/terminal/Terminal"));
+const CommandPalette = lazy(() => import("./components/commandpalette/CommandPalette"));
+const ParticleBackground = lazy(() => import("./components/particles/ParticleBackground"));
+const SmoothScroll = lazy(() => import("./components/smoothscroll/SmoothScroll"));
+const ScrollProgress = lazy(() => import("./components/scrollprogress/ScrollProgress"));
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -32,61 +35,69 @@ const App = () => {
         {loading && <Preloader onComplete={handlePreloaderComplete} />}
       </AnimatePresence>
 
-      {/* Particle constellation background */}
-      <ParticleBackground />
+      <Suspense fallback={null}>
+        {/* Particle constellation background */}
+        <ErrorBoundary name="ParticleBackground">
+          <ParticleBackground />
+        </ErrorBoundary>
 
-      {/* Scroll progress bar + circular indicator */}
-      <ScrollProgress />
+        {/* Scroll progress bar + circular indicator */}
+        <ErrorBoundary name="ScrollProgress">
+          <ScrollProgress />
+        </ErrorBoundary>
 
-      <SmoothScroll>
-        <div className="app-container">
-          <Cursor />
-          <Sidebar />
-          <CommandPalette />
-      
-      <main className="main-content">
-        <section id="about">
-          <Hero />
-        </section>
+        <SmoothScroll>
+          <div className="app-container">
+            <Cursor />
+            <Sidebar />
+            <CommandPalette />
+        
+            <main className="main-content">
+              <section id="about">
+                <ErrorBoundary name="Hero">
+                  <Hero />
+                </ErrorBoundary>
+              </section>
 
-        <section className="parallax-section">
-          <Parallax type="services" />
-        </section>
+              <section className="parallax-section">
+                <Parallax type="services" />
+              </section>
 
-        <section id="experience">
-          <Services />
-        </section>
+              <section id="experience">
+                <Services />
+              </section>
 
-        <section className="parallax-section">
-          <Parallax type="portfolio" />
-        </section>
+              <section className="parallax-section">
+                <Parallax type="portfolio" />
+              </section>
 
-        <section id="skills">
-          <Skills />
-        </section>
+              <section id="skills">
+                <Skills />
+              </section>
 
-        <section id="projects">
-          <Projects />
-        </section>
+              <section id="projects">
+                <Projects />
+              </section>
 
-        <section id="portfolio">
-          <Portfolio />
-        </section>
+              <section id="portfolio">
+                <Portfolio />
+              </section>
 
-        <section id="blog">
-          <Blog />
-        </section>
+              <section id="blog">
+                <Blog />
+              </section>
 
-        <section id="terminal" className="terminal-section">
-          <Terminal />
-        </section>
+              <section id="terminal" className="terminal-section">
+                <Terminal />
+              </section>
 
-        <section id="contact">
-          <Contact />
-        </section>
-      </main>
-    </div>
-    </SmoothScroll>
+              <section id="contact">
+                <Contact />
+              </section>
+            </main>
+          </div>
+        </SmoothScroll>
+      </Suspense>
     </>
   );
 };

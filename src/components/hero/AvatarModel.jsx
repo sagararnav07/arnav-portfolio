@@ -1,7 +1,20 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF, Environment, ContactShadows, Float, Text, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
+
+// Detect WebGL support to avoid crashes on restricted environments
+function isWebGLAvailable() {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    );
+  } catch {
+    return false;
+  }
+}
 
 function Avatar({ mousePosition, onRotationChange }) {
   const group = useRef();
@@ -172,6 +185,7 @@ function OrbitingLights() {
 const AvatarModel = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [rotationState, setRotationState] = useState({ intensity: 0, direction: 1 });
+  const [webglSupported] = useState(() => isWebGLAvailable());
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -188,6 +202,31 @@ const AvatarModel = () => {
   const handleRotationChange = (intensity, direction) => {
     setRotationState({ intensity, direction });
   };
+
+  // Fallback for environments where WebGL is disabled (corporate laptops, etc.)
+  if (!webglSupported) {
+    return (
+      <div className="avatar-model-container" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.1) 0%, transparent 70%)',
+      }}>
+        <img
+          src="/public.png"
+          alt="Arnav Sagar"
+          style={{
+            width: '260px',
+            height: '260px',
+            borderRadius: '50%',
+            objectFit: 'cover',
+            border: '2px solid rgba(139,92,246,0.3)',
+            boxShadow: '0 0 40px rgba(139,92,246,0.2)',
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="avatar-model-container">
