@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import "./app.scss";
 import Preloader from "./components/preloader/Preloader";
 import ErrorBoundary from "./components/ErrorBoundary";
+import useVisitorTracker from "./hooks/useVisitorTracker";
 
 // Lazy-load heavy components to reduce initial bundle size
 const Contact = lazy(() => import("./components/contact/Contact"));
@@ -23,6 +24,7 @@ const ScrollProgress = lazy(() => import("./components/scrollprogress/ScrollProg
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  useVisitorTracker();
 
   const handlePreloaderComplete = useCallback(() => {
     setLoading(false);
