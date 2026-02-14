@@ -87,6 +87,10 @@
     align-items: center;
     gap: 0;
     flex-wrap: nowrap;
+
+    @include mobile {
+      flex-wrap: wrap;
+    }
   }
 
   &__prompt-user {
@@ -202,6 +206,12 @@
   display: flex;
   gap: 16px;
   padding: 2px 0 2px 16px;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px 0 4px 12px;
+  }
 }
 
 .term-cmd-name {
@@ -252,6 +262,11 @@
   gap: 14px;
   padding: 8px 0 12px 8px;
   position: relative;
+
+  @include mobile {
+    gap: 10px;
+    padding: 6px 0 10px 4px;
+  }
 
   &:not(:last-child)::after {
     content: '';

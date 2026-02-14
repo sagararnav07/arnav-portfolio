@@ -17,6 +17,14 @@ const navItems = [
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('about');
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 738);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,11 +58,11 @@ const Sidebar = () => {
   return (
     <motion.nav 
       className={`sidebar ${isExpanded ? 'expanded' : ''}`}
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
+      initial={isMobile ? { y: 100, opacity: 0 } : { x: -100, opacity: 0 }}
+      animate={isMobile ? { y: 0, opacity: 1 } : { x: 0, opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
+      onMouseEnter={() => !isMobile && setIsExpanded(true)}
+      onMouseLeave={() => !isMobile && setIsExpanded(false)}
     >
       <div className="sidebar-logo">
         <motion.div 

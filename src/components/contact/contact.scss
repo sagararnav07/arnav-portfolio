@@ -14,6 +14,11 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 .contact__info {
@@ -59,6 +64,11 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   transition: all 0.25s ease;
+
+  @include mobile {
+    padding: 16px;
+    gap: 12px;
+  }
 
   &:hover {
     border-color: rgba(139, 92, 246, 0.2);
@@ -186,6 +196,12 @@
   cursor: pointer;
   transition: all 0.25s ease;
   box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+  width: 100%;
+
+  @include mobile {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
 
   &:hover:not(:disabled) {
     box-shadow: 0 6px 30px rgba(139, 92, 246, 0.4);

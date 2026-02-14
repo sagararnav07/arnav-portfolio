@@ -150,6 +150,10 @@
 
   &__content {
     padding: 20px;
+
+    @include mobile {
+      padding: 16px;
+    }
   }
 
   &__title {

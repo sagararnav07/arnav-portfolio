@@ -288,6 +288,11 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+
+  @include mobile {
+    gap: 8px;
+    width: 100%;
+  }
 }
 
 .pcard__btn {
@@ -347,5 +352,8 @@
   @include mobile {
     padding: 9px 16px;
     font-size: 12px;
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
   }
 }

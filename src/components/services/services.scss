@@ -25,6 +25,10 @@
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
+  @include mobile {
+    margin-bottom: 20px;
+  }
+
   .column-icon {
     font-size: 20px;
     color: #8b5cf6;
@@ -34,6 +38,10 @@
     font-size: 20px;
     font-weight: 600;
     color: #fff;
+
+    @include mobile {
+      font-size: 18px;
+    }
   }
 }
 
@@ -46,6 +54,10 @@
 .timeline-item {
   display: flex;
   gap: 20px;
+
+  @include mobile {
+    gap: 12px;
+  }
 }
 
 .timeline-marker {
@@ -86,6 +98,11 @@
   padding: 24px;
   transition: all 0.3s ease;
 
+  @include mobile {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
   &:hover {
     border-color: rgba(139, 92, 246, 0.2);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -97,6 +114,11 @@
   gap: 16px;
   margin-bottom: 16px;
 
+  @include mobile {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
   .company-logo {
     width: 50px;
     height: 50px;
@@ -105,6 +127,12 @@
     background: rgba(255, 255, 255, 0.95);
     padding: 8px;
     flex-shrink: 0;
+
+    @include mobile {
+      width: 40px;
+      height: 40px;
+      padding: 6px;
+    }
   }
 }
 
@@ -117,6 +145,10 @@
   font-weight: 600;
   color: #fff;
   margin-bottom: 4px;
+
+  @include mobile {
+    font-size: 15px;
+  }
 }
 
 .card-company {

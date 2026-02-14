@@ -1,6 +1,10 @@
 .section-header {
   margin-bottom: 48px;
 
+  @media (max-width: 738px) {
+    margin-bottom: 32px;
+  }
+
   &--left {
     text-align: left;
 
@@ -48,5 +52,9 @@
 
   @media (max-width: 768px) {
     font-size: 14px;
+  }
+
+  @media (max-width: 738px) {
+    margin-top: 12px;
   }
 }

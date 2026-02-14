@@ -34,8 +34,8 @@
   }
 
   @include mobile {
-    bottom: 18px;
-    right: 18px;
+    bottom: 84px; // above bottom nav bar
+    right: 16px;
     padding: 8px 14px;
     font-size: 11px;
     gap: 8px;
