@@ -27,7 +27,7 @@
   }
 
   // Mobile: convert to bottom nav bar
-  @include mobile {
+  @include tablet-down {
     top: auto;
     bottom: 0;
     left: 0;
@@ -37,12 +37,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 8px 12px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
     border-right: none;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(10, 10, 26, 0.95);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: rgba(10, 10, 26, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    max-width: 100vw;
+    overflow-x: auto;
 
     &.expanded {
       width: 100% !important;
@@ -66,14 +68,14 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 18px;
+    font-size: clamp(16px, 3vw, 18px);
     color: white;
     flex-shrink: 0;
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
   }
 
   .logo-text {
-    font-size: 18px;
+    font-size: clamp(16px, 3vw, 18px);
     font-weight: 600;
     color: white;
     white-space: nowrap;
@@ -82,7 +84,7 @@
     transition: all 0.3s ease;
   }
 
-  @include mobile {
+  @include tablet-down {
     display: none;
   }
 }
@@ -93,12 +95,13 @@
   gap: 8px;
   flex: 1;
 
-  @include mobile {
+  @include tablet-down {
     flex-direction: row;
     gap: 4px;
     flex: none;
     width: 100%;
     justify-content: space-around;
+    overflow-x: auto;
   }
 }
 
@@ -119,13 +122,16 @@
     background: rgba(255, 255, 255, 0.05);
   }
 
-  @include mobile {
+  @include tablet-down {
     flex-direction: column;
     gap: 4px;
-    padding: 8px 10px;
+    padding: 10px 6px;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
   }
 
   &.active {
@@ -147,27 +153,22 @@
   }
 
   .nav-icon {
-    font-size: 20px;
+    font-size: clamp(18px, 3vw, 20px);
     flex-shrink: 0;
     transition: color 0.2s ease;
-
-    @include mobile {
-      font-size: 18px;
-    }
   }
 
   .nav-label {
-    font-size: 14px;
+    font-size: clamp(9px, 2vw, 14px);
     font-weight: 500;
     white-space: nowrap;
     opacity: 0;
     transform: translateX(-10px);
     transition: all 0.3s ease;
 
-    @include mobile {
+    @include tablet-down {
       opacity: 1;
       transform: none;
-      font-size: 9px;
       font-weight: 600;
       letter-spacing: 0.3px;
     }
@@ -178,7 +179,7 @@
   padding: 16px 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 
-  @include mobile {
+  @include tablet-down {
     display: none;
   }
 }

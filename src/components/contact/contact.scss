@@ -7,45 +7,40 @@
 .contact__layout {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 60px;
+  gap: clamp(24px, 6vw, 60px);
   align-items: start;
 
-  @include tablet {
+  @include laptop-down {
     grid-template-columns: 1fr;
     gap: 40px;
-  }
-
-  @include mobile {
-    grid-template-columns: 1fr;
-    gap: 24px;
   }
 }
 
 .contact__info {
   position: sticky;
   top: 100px;
+  width: 100%;
+  max-width: 100%;
 
-  @include tablet {
+  @include laptop-down {
     position: static;
   }
 }
 
 .contact__info-title {
-  font-size: 28px;
+  font-size: clamp(20px, 4vw, 28px);
   font-weight: 600;
   color: #fff;
   margin-bottom: 16px;
-
-  @include mobile {
-    font-size: 22px;
-  }
+  word-wrap: break-word;
 }
 
 .contact__info-text {
-  font-size: 15px;
+  font-size: clamp(13px, 2vw, 15px);
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.7;
   margin-bottom: 32px;
+  word-wrap: break-word;
 }
 
 .contact__cards {
@@ -57,18 +52,15 @@
 .contact-card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 20px;
+  gap: clamp(12px, 2vw, 16px);
+  padding: clamp(16px, 3vw, 20px);
   background: rgba(20, 20, 45, 0.6);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   transition: all 0.25s ease;
-
-  @include mobile {
-    padding: 16px;
-    gap: 12px;
-  }
+  width: 100%;
+  max-width: 100%;
 
   &:hover {
     border-color: rgba(139, 92, 246, 0.2);
@@ -81,9 +73,10 @@
     justify-content: center;
     width: 48px;
     height: 48px;
+    min-width: 48px;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.1));
     border-radius: 12px;
-    font-size: 20px;
+    font-size: clamp(18px, 3vw, 20px);
     color: #8b5cf6;
     flex-shrink: 0;
   }
@@ -91,10 +84,12 @@
   &__content {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    flex: 1;
   }
 
   &__label {
-    font-size: 12px;
+    font-size: clamp(10px, 1.5vw, 12px);
     color: rgba(255, 255, 255, 0.45);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -102,9 +97,11 @@
   }
 
   &__value {
-    font-size: 15px;
+    font-size: clamp(13px, 2vw, 15px);
     color: #fff;
     font-weight: 500;
+    overflow-wrap: break-word;
+    word-break: break-word;
 
     &:hover {
       color: #8b5cf6;
@@ -118,25 +115,23 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  padding: 36px;
-
-  @include mobile {
-    padding: 24px;
-  }
+  padding: clamp(24px, 4vw, 36px);
+  width: 100%;
+  max-width: 100%;
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(20px, 3vw, 24px);
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: clamp(16px, 3vw, 20px);
 
-  @include mobile {
+  @include tablet-down {
     grid-template-columns: 1fr;
   }
 }
@@ -145,24 +140,27 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 
   label {
-    font-size: 13px;
+    font-size: clamp(12px, 2vw, 13px);
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7);
   }
 
   input,
   textarea {
-    padding: 14px 18px;
+    padding: clamp(12px, 2vw, 14px) clamp(16px, 2vw, 18px);
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     color: #fff;
-    font-size: 15px;
+    font-size: clamp(13px, 2vw, 15px);
     font-family: inherit;
     transition: all 0.2s ease;
     resize: none;
+    width: 100%;
+    max-width: 100%;
 
     &::placeholder {
       color: rgba(255, 255, 255, 0.3);
@@ -177,7 +175,7 @@
   }
 
   textarea {
-    min-height: 140px;
+    min-height: clamp(120px, 20vw, 140px);
   }
 }
 
@@ -186,22 +184,18 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 16px 32px;
+  padding: clamp(14px, 2vw, 16px) clamp(24px, 4vw, 32px);
   background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
   border: none;
   border-radius: 12px;
   color: white;
-  font-size: 15px;
+  font-size: clamp(13px, 2vw, 15px);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease;
   box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
   width: 100%;
-
-  @include mobile {
-    padding: 14px 24px;
-    font-size: 14px;
-  }
+  min-height: 50px;
 
   &:hover:not(:disabled) {
     box-shadow: 0 6px 30px rgba(139, 92, 246, 0.4);

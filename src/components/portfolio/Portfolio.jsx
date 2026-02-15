@@ -169,7 +169,7 @@ const Portfolio = () => {
           animate="visible"
           key={activeTab}
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
               <motion.article 
                 key={item.id}

@@ -2,18 +2,21 @@
 
 .navbar {
   height: 100px;
+  width: 100%;
+  max-width: 100%;
 
   .wrapper {
-    max-width: 1366px;
+    max-width: min(1366px, 100%);
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    padding: 0 clamp(16px, 3vw, 24px);
 
-    @include mobile {
+    @include tablet-down {
       justify-content: flex-end;
-      padding: 20px;
+      padding: 20px 16px;
     }
 
     .logo {
@@ -21,7 +24,7 @@
       align-items: center;
       gap: 10px;
 
-      @include mobile {
+      @include tablet-down {
         display: none;
       }
 
@@ -30,11 +33,12 @@
         height: 32px;
         border-radius: 8px;
         object-fit: cover;
+        flex-shrink: 0;
       }
 
       span {
         font-weight: bold;
-        font-size: 18px;
+        font-size: clamp(14px, 2vw, 18px);
         color: #fff;
       }
     }
@@ -42,18 +46,21 @@
     span {
       font-weight: bold;
 
-      @include mobile {
+      @include tablet-down {
         display: none;
       }
     }
 
     .social {
       display: flex;
-      gap: 20px;
+      gap: clamp(12px, 2vw, 20px);
+      flex-wrap: wrap;
 
       img {
         width: 18px;
         height: 18px;
+        max-width: 100%;
+        height: auto;
       }
     }
   }

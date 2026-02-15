@@ -28,7 +28,7 @@
   @include mobile {
     width: 36px;
     height: 36px;
-    bottom: 84px; // above bottom nav bar
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
     left: 16px;
   }
 }

@@ -21,43 +21,32 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 30px;
+  margin-bottom: clamp(20px, 4vw, 30px);
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-  @include mobile {
-    margin-bottom: 20px;
-  }
+  flex-wrap: wrap;
 
   .column-icon {
-    font-size: 20px;
+    font-size: clamp(18px, 3vw, 20px);
     color: #8b5cf6;
   }
 
   h3 {
-    font-size: 20px;
+    font-size: clamp(17px, 3vw, 20px);
     font-weight: 600;
     color: #fff;
-
-    @include mobile {
-      font-size: 18px;
-    }
   }
 }
 
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(20px, 3vw, 24px);
 }
 
 .timeline-item {
   display: flex;
-  gap: 20px;
-
-  @include mobile {
-    gap: 12px;
-  }
+  gap: clamp(12px, 2vw, 20px);
 }
 
 .timeline-marker {
@@ -95,13 +84,10 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
-  padding: 24px;
+  padding: clamp(16px, 3vw, 24px);
   transition: all 0.3s ease;
-
-  @include mobile {
-    padding: 16px;
-    border-radius: 12px;
-  }
+  width: 100%;
+  max-width: 100%;
 
   &:hover {
     border-color: rgba(139, 92, 246, 0.2);
@@ -111,28 +97,19 @@
 
 .card-header {
   display: flex;
-  gap: 16px;
+  gap: clamp(12px, 2vw, 16px);
   margin-bottom: 16px;
-
-  @include mobile {
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
+  align-items: center;
 
   .company-logo {
-    width: 50px;
-    height: 50px;
+    width: clamp(40px, 8vw, 50px);
+    height: clamp(40px, 8vw, 50px);
     object-fit: contain;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.95);
-    padding: 8px;
+    padding: clamp(6px, 1vw, 8px);
     flex-shrink: 0;
-
-    @include mobile {
-      width: 40px;
-      height: 40px;
-      padding: 6px;
-    }
   }
 }
 
@@ -141,20 +118,18 @@
 }
 
 .card-title {
-  font-size: 17px;
+  font-size: clamp(14px, 2.5vw, 17px);
   font-weight: 600;
   color: #fff;
   margin-bottom: 4px;
-
-  @include mobile {
-    font-size: 15px;
-  }
+  word-wrap: break-word;
 }
 
 .card-company {
-  font-size: 14px;
+  font-size: clamp(13px, 2vw, 14px);
   color: #8b5cf6;
   margin-bottom: 8px;
+  word-wrap: break-word;
 }
 
 .card-meta {
@@ -197,18 +172,20 @@
   li {
     position: relative;
     padding-left: 16px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: clamp(12px, 2vw, 13px);
     line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 
-    &::before {
+    &:before {
       content: '';
       position: absolute;
       left: 0;
       top: 8px;
-      width: 5px;
-      height: 5px;
-      background: rgba(139, 92, 246, 0.6);
+      width: 6px;
+      height: 6px;
+      background: #8b5cf6;
       border-radius: 50%;
     }
   }

@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 
 const ParticleBackground = () => {
   const [init, setInit] = useState(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 738;
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -13,10 +14,10 @@ const ParticleBackground = () => {
 
   const options = useMemo(() => ({
     fullScreen: { enable: true, zIndex: -1 },
-    fpsLimit: 60,
+    fpsLimit: isMobile ? 30 : 60,
     particles: {
       number: {
-        value: 60,
+        value: isMobile ? 20 : 60,
         density: { enable: true, width: 1920, height: 1080 },
       },
       color: {
@@ -44,12 +45,12 @@ const ParticleBackground = () => {
       },
       links: {
         enable: true,
-        distance: 150,
+        distance: isMobile ? 120 : 150,
         color: '#8b5cf6',
         opacity: 0.08,
         width: 1,
         triangles: {
-          enable: true,
+          enable: !isMobile,
           opacity: 0.02,
         },
       },
@@ -57,7 +58,7 @@ const ParticleBackground = () => {
     interactivity: {
       events: {
         onHover: {
-          enable: true,
+          enable: !isMobile,
           mode: 'grab',
         },
         onClick: {
@@ -74,7 +75,7 @@ const ParticleBackground = () => {
           },
         },
         push: {
-          quantity: 3,
+          quantity: isMobile ? 1 : 3,
         },
       },
     },

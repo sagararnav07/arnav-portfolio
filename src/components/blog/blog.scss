@@ -29,17 +29,8 @@
 // Blog Grid
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-
-  @include tablet {
-    grid-template-columns: 1fr;
-  }
-
-  @include mobile {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: clamp(20px, 4vw, 30px);
 }
 
 // Blog Card
@@ -51,6 +42,8 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  max-width: 100%;
 
   &:hover {
     border-color: rgba(139, 92, 246, 0.3);
@@ -65,17 +58,14 @@
 
   &__image {
     position: relative;
-    height: 200px;
+    height: clamp(160px, 30vw, 200px);
     overflow: hidden;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
-
-    @include mobile {
-      height: 160px;
-    }
 
     img {
       width: 100%;
       height: 100%;
+      max-width: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
     }
@@ -98,15 +88,10 @@
   }
 
   &__content {
-    padding: 24px;
-    margin-top: -40px;
+    padding: clamp(16px, 3vw, 24px);
+    margin-top: clamp(-30px, -5vw, -40px);
     position: relative;
     z-index: 2;
-
-    @include mobile {
-      padding: 16px;
-      margin-top: -30px;
-    }
   }
 
   &__tags {
@@ -126,19 +111,16 @@
   }
 
   &__title {
-    font-size: 20px;
+    font-size: clamp(16px, 3vw, 20px);
     font-weight: 600;
     color: white;
     margin-bottom: 10px;
     line-height: 1.3;
-
-    @include mobile {
-      font-size: 17px;
-    }
+    word-wrap: break-word;
   }
 
   &__excerpt {
-    font-size: 14px;
+    font-size: clamp(12px, 2vw, 14px);
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
     margin-bottom: 16px;
@@ -146,6 +128,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    word-wrap: break-word;
   }
 
   &__meta {
@@ -377,9 +360,16 @@
 .blog-post__content {
   pre {
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    -webkit-overflow-scrolling: touch;
     
     code {
       font-family: 'Fira Code', 'JetBrains Mono', monospace !important;
+
+      @include mobile {
+        font-size: 12px !important;
+      }
     }
   }
 }

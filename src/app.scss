@@ -1,5 +1,59 @@
+// ── Variables ──────────────────────────────────────
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+$primary: #8b5cf6;
+$secondary: #06b6d4;
+$success: #10b981;
+$warning: #f59e0b;
+$background-dark: #0a0a1a;
+$background-card: rgba(20, 20, 45, 0.6);
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.7);
+$text-muted: rgba(255, 255, 255, 0.5);
+
+// ── Responsive Breakpoints ────────────────────────
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: 481px) and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin tablet-down {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin small-laptop {
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin laptop-down {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// ── Base ───────────────────────────────────────────
 html {
   // scroll-behavior handled by Lenis smooth scroll
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 html.lenis, html.lenis body {
@@ -33,6 +87,13 @@ body {
   background-attachment: fixed;
   color: #e0e0e0;
   line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+
+  @include tablet-down {
+    background-attachment: scroll; // fixed not supported on iOS Safari
+  }
 }
 
 a {
@@ -44,45 +105,60 @@ a {
 .app-container {
   display: flex;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .main-content {
   flex: 1;
   margin-left: 80px;
   transition: margin-left 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 
-  @media (max-width: 738px) {
+  @include tablet-down {
     margin-left: 0;
-    padding-bottom: 72px; // space for bottom nav
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); // space for bottom nav + safe area
   }
 }
 
 // Section styles
 section {
   min-height: 100vh;
-  padding: 80px 60px;
+  min-height: 100dvh;
+  padding: clamp(40px, 8vw, 80px) clamp(16px, 5vw, 60px);
   position: relative;
+  width: 100%;
+  max-width: 100%;
 
-  @media (max-width: 1024px) {
+  @include small-laptop {
     padding: 60px 40px;
   }
 
-  @media (max-width: 738px) {
-    padding: 40px 20px;
+  @include tablet-down {
+    padding: 40px clamp(16px, 4vw, 24px);
+  }
+
+  @include mobile {
+    padding: 32px 16px;
   }
 
   &.parallax-section {
     padding: 0;
     height: 100vh;
+    height: 100dvh;
     min-height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
     // Break out of sidebar margin to go full-width
     margin-left: -80px;
     width: calc(100% + 80px);
+    max-width: calc(100% + 80px);
 
-    @media (max-width: 738px) {
+    @include tablet-down {
       margin-left: 0;
       width: 100%;
+      max-width: 100%;
     }
   }
 
@@ -94,9 +170,10 @@ section {
 
 // Utility classes
 .container {
-  max-width: 1200px;
+  max-width: min(1200px, 100%);
   margin: 0 auto;
   width: 100%;
+  padding: 0 clamp(16px, 3vw, 24px);
 }
 
 // Glassmorphism utility
@@ -117,39 +194,4 @@ section {
 
 .text-muted {
   color: rgba(255, 255, 255, 0.5);
-}
-
-// Spacing scale
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
-$spacing-2xl: 48px;
-
-// Colors
-$primary: #8b5cf6;
-$secondary: #06b6d4;
-$success: #10b981;
-$warning: #f59e0b;
-$background-dark: #0a0a1a;
-$background-card: rgba(20, 20, 45, 0.6);
-$text-primary: #ffffff;
-$text-secondary: rgba(255, 255, 255, 0.7);
-$text-muted: rgba(255, 255, 255, 0.5);
-
-@mixin mobile {
-  @media (max-width: 738px) {
-    @content;
-  }
-}
-@mixin tablet {
-  @media (max-width: 1024px) {
-    @content;
-  }
-}
-@mixin desktop {
-  @media (max-width: 1366px) {
-    @content;
-  }
 }

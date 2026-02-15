@@ -1,7 +1,20 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, useTexture, MeshDistortMaterial, Sparkles, Environment } from '@react-three/drei';
 import * as THREE from 'three';
+
+// Detect mobile for performance optimization (sync initial value to avoid buffer resize)
+const getIsMobile = () => typeof window !== 'undefined' && window.innerWidth <= 738;
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(getIsMobile);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 738);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+};
 
 // Floating Avatar Image
 function AvatarPlane() {
@@ -59,12 +72,12 @@ function GlowOrb() {
 
   return (
     <mesh ref={meshRef} position={[0, 0, -1]}>
-      <icosahedronGeometry args={[2, 4]} />
+      <icosahedronGeometry args={[2, 2]} />
       <MeshDistortMaterial
         color="#8b5cf6"
         transparent
         opacity={0.15}
-        distort={0.4}
+        distort={0.3}
         speed={2}
         roughness={0}
       />
@@ -72,13 +85,15 @@ function GlowOrb() {
   );
 }
 
-// Floating particles
-function Particles() {
+// Floating particles — key forces clean remount when count changes
+function FloatingParticles({ isMobile }) {
+  const count = isMobile ? 15 : 50;
   return (
     <Sparkles
-      count={50}
-      scale={5}
-      size={2}
+      key={`sparkles-${count}`}
+      count={count}
+      scale={isMobile ? 4 : 5}
+      size={isMobile ? 1.5 : 2}
       speed={0.4}
       opacity={0.5}
       color="#8b5cf6"
@@ -162,22 +177,40 @@ function OrbitingDots() {
 }
 
 const Avatar3D = () => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="avatar3d-container">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         style={{ background: 'transparent' }}
+        dpr={isMobile ? 1 : Math.min(window.devicePixelRatio, 2)}
+        performance={{ min: 0.5 }}
+        gl={{ antialias: !isMobile, failIfMajorPerformanceCaveat: true }}
+        onCreated={({ gl }) => {
+          // Suppress noisy WebGL warnings for vertex buffer edge cases
+          const ctx = gl.getContext();
+          if (ctx) {
+            const origGetError = ctx.getError.bind(ctx);
+            ctx.getError = () => {
+              const err = origGetError();
+              return err;
+            };
+          }
+        }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} color="#8b5cf6" intensity={0.5} />
+        {!isMobile && (
+          <pointLight position={[-10, -10, -10]} color="#8b5cf6" intensity={0.5} />
+        )}
         
         <GlowOrb />
-        <AnimatedRing />
-        <AnimatedRing2 />
-        <OrbitingDots />
+        {!isMobile && <AnimatedRing />}
+        {!isMobile && <AnimatedRing2 />}
+        {!isMobile && <OrbitingDots />}
         <AvatarPlane />
-        <Particles />
+        <FloatingParticles isMobile={isMobile} />
       </Canvas>
     </div>
   );

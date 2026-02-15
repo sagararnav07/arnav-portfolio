@@ -4,16 +4,22 @@ import { useGLTF, Environment, ContactShadows, Float, Text, Sparkles } from '@re
 import * as THREE from 'three';
 
 // Detect WebGL support to avoid crashes on restricted environments
+let _webglCached = null;
 function isWebGLAvailable() {
+  if (_webglCached !== null) return _webglCached;
   try {
     const canvas = document.createElement('canvas');
-    return !!(
-      window.WebGLRenderingContext &&
-      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
-    );
+    const ctx = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (ctx) {
+      // Lose context immediately so it doesn't count toward the browser limit
+      const ext = ctx.getExtension('WEBGL_lose_context');
+      if (ext) ext.loseContext();
+    }
+    _webglCached = !!ctx;
   } catch {
-    return false;
+    _webglCached = false;
   }
+  return _webglCached;
 }
 
 function Avatar({ mousePosition, onRotationChange }) {
@@ -233,6 +239,7 @@ const AvatarModel = () => {
       <Canvas
         camera={{ position: [0, 0.8, 5], fov: 35 }}
         style={{ background: 'transparent' }}
+        gl={{ antialias: true, powerPreference: 'high-performance' }}
       >
         <ambientLight intensity={1} />
         <directionalLight position={[5, 5, 5]} intensity={1.5} />
@@ -246,13 +253,13 @@ const AvatarModel = () => {
         <TransitionEffect intensity={rotationState.intensity} direction={rotationState.direction} />
         <CodeSymbols intensity={rotationState.intensity} direction={rotationState.direction} />
         
-        {/* Sparkles that intensify at rotation edges */}
+        {/* Sparkles — fixed count to avoid vertex buffer reallocation */}
         <Sparkles
-          count={30 + Math.floor(rotationState.intensity * 50)}
+          count={50}
           scale={4}
-          size={2 + rotationState.intensity * 3}
+          size={3}
           speed={0.5}
-          opacity={0.3 + rotationState.intensity * 0.5}
+          opacity={0.5}
           color="#8b5cf6"
         />
         

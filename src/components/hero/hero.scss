@@ -2,12 +2,15 @@
 
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   padding: 0;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 // Scrolling Background Text
@@ -23,30 +26,20 @@
 
   .hero__sliding-text-track {
     display: flex;
-    gap: 80px;
+    gap: clamp(40px, 8vw, 80px);
     animation: slideText 25s linear infinite;
     width: max-content;
 
     span {
-      font-size: 180px;
+      font-size: clamp(48px, 15vw, 180px);
       font-weight: 800;
       color: transparent;
       -webkit-text-stroke: 1px rgba(139, 92, 246, 0.15);
       text-stroke: 1px rgba(139, 92, 246, 0.15);
       text-transform: uppercase;
       white-space: nowrap;
-      letter-spacing: 10px;
+      letter-spacing: clamp(2px, 1vw, 10px);
       user-select: none;
-
-      @include tablet {
-        font-size: 120px;
-        letter-spacing: 5px;
-      }
-
-      @include mobile {
-        font-size: 80px;
-        letter-spacing: 3px;
-      }
     }
   }
 }
@@ -64,8 +57,9 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
 
-  @include tablet {
+  @include tablet-down {
     justify-content: center;
   }
 
@@ -97,59 +91,49 @@
 }
 
 .hero__name {
-  font-size: 64px;
+  font-size: clamp(28px, 7vw, 64px);
   font-weight: 700;
   color: #fff;
   line-height: 1.1;
   letter-spacing: -1px;
-
-  @include tablet {
-    font-size: 48px;
-  }
-
-  @include mobile {
-    font-size: 36px;
-  }
+  word-break: break-word;
 }
 
 .hero__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: clamp(24px, 5vw, 60px);
   align-items: center;
-  max-width: 1200px;
+  max-width: min(1200px, 100%);
   margin: 0 auto;
   width: 100%;
-  padding: 0 16px;
+  padding: 0 clamp(12px, 3vw, 24px);
 
-  @include tablet {
+  @include laptop-down {
     grid-template-columns: 1fr;
     gap: 40px;
     text-align: center;
   }
 
+  @include tablet-down {
+    gap: 32px;
+  }
+
   @include mobile {
-    grid-template-columns: 1fr;
     gap: 24px;
-    text-align: center;
-    padding: 0 8px;
   }
 }
 
 .hero__content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: clamp(16px, 3vw, 20px);
+  width: 100%;
+  max-width: 100%;
 
-  @include tablet {
+  @include laptop-down {
     align-items: center;
     order: 2;
-  }
-
-  @include mobile {
-    align-items: center;
-    order: 2;
-    gap: 16px;
   }
 }
 
@@ -157,11 +141,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 18px;
+  font-size: clamp(14px, 2vw, 18px);
   color: rgba(255, 255, 255, 0.7);
+  flex-wrap: wrap;
 
   .hero__wave {
-    font-size: 24px;
+    font-size: clamp(18px, 3vw, 24px);
     animation: wave 2s ease-in-out infinite;
     display: inline-block;
     transform-origin: 70% 70%;
@@ -180,7 +165,7 @@
   gap: 12px;
   flex-wrap: wrap;
 
-  @include tablet {
+  @include laptop-down {
     justify-content: center;
   }
 
@@ -190,7 +175,7 @@
   }
 
   .hero__role {
-    font-size: 16px;
+    font-size: clamp(13px, 2vw, 16px);
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
   }
@@ -205,23 +190,21 @@
 }
 
 .hero__bio {
-  font-size: 16px;
+  font-size: clamp(14px, 2vw, 16px);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.6);
   max-width: 500px;
-
-  @include mobile {
-    font-size: 14px;
-  }
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .hero__tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: clamp(6px, 1.5vw, 10px);
   margin-top: 8px;
 
-  @include tablet {
+  @include laptop-down {
     justify-content: center;
   }
 }
@@ -231,9 +214,10 @@
   background: rgba(139, 92, 246, 0.1);
   border: 1px solid rgba(139, 92, 246, 0.2);
   border-radius: 20px;
-  font-size: 13px;
+  font-size: clamp(11px, 1.5vw, 13px);
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.2s ease;
+  white-space: nowrap;
 
   &:hover {
     background: rgba(139, 92, 246, 0.2);
@@ -245,6 +229,11 @@
   display: flex;
   gap: 16px;
   margin-top: 16px;
+  flex-wrap: wrap;
+
+  @include tablet-down {
+    justify-content: center;
+  }
 
   @include mobile {
     flex-direction: column;
@@ -257,14 +246,20 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
+  padding: clamp(12px, 2vw, 14px) clamp(20px, 3vw, 28px);
   border-radius: 12px;
-  font-size: 15px;
+  font-size: clamp(13px, 2vw, 15px);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease;
   border: none;
   text-decoration: none;
+  white-space: nowrap;
+  min-height: 44px;
+
+  @include mobile {
+    width: 100%;
+  }
 
   &--primary {
     background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
@@ -292,8 +287,9 @@
   display: flex;
   gap: 16px;
   margin-top: 16px;
+  flex-wrap: wrap;
 
-  @include tablet {
+  @include laptop-down {
     justify-content: center;
   }
 }
@@ -310,6 +306,7 @@
   font-size: 20px;
   color: rgba(255, 255, 255, 0.6);
   transition: all 0.25s ease;
+  flex-shrink: 0;
 
   &:hover {
     background: rgba(139, 92, 246, 0.1);
@@ -323,28 +320,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: clamp(20px, 4vw, 30px);
+  width: 100%;
+  max-width: 100%;
 
-  @include tablet {
+  @include laptop-down {
     order: 1;
   }
 }
 
 // 3D Avatar Container
 .hero__3d-avatar {
-  width: 380px;
-  height: 450px;
+  width: min(380px, 90vw);
+  height: clamp(260px, 50vw, 450px);
   position: relative;
-
-  @include tablet {
-    width: 320px;
-    height: 400px;
-  }
-
-  @include mobile {
-    width: 280px;
-    height: 350px;
-  }
+  max-width: 100%;
 }
 
 .avatar-model-container {
@@ -386,21 +376,12 @@
 // Animated Avatar Wrapper (fallback)
 .hero__avatar-wrapper {
   position: relative;
-  width: 340px;
-  height: 400px;
+  width: clamp(220px, 50vw, 340px);
+  height: clamp(260px, 55vw, 400px);
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @include tablet {
-    width: 300px;
-    height: 360px;
-  }
-
-  @include mobile {
-    width: 260px;
-    height: 320px;
-  }
+  max-width: 100%;
 }
 
 // Animated rotating rings
@@ -496,29 +477,19 @@
 
 // Avatar image
 .avatar-image {
-  width: 280px;
+  width: clamp(180px, 40vw, 280px);
   height: auto;
+  max-width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
-  
-  @include tablet {
-    width: 240px;
-  }
-  
-  @include mobile {
-    width: 200px;
-  }
 }
 
 .hero__image-wrapper {
   position: relative;
-  width: 320px;
-  height: 320px;
-
-  @include mobile {
-    width: 220px;
-    height: 220px;
-  }
+  width: clamp(180px, 40vw, 320px);
+  height: clamp(180px, 40vw, 320px);
+  max-width: 90vw;
+  max-height: 90vw;
 }
 
 .hero__image-glow {
@@ -562,15 +533,11 @@
 }
 
 .hero__initials {
-  font-size: 100px;
+  font-size: clamp(50px, 12vw, 100px);
   font-weight: 700;
   color: #fff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  letter-spacing: 4px;
-
-  @include mobile {
-    font-size: 70px;
-  }
+  letter-spacing: clamp(2px, 1vw, 4px);
 }
 
 .hero__image {
@@ -598,50 +565,37 @@
 
 .hero__stats {
   display: flex;
-  gap: 20px;
-
-  @include mobile {
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  gap: clamp(12px, 3vw, 20px);
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
 }
 
 .stat-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 24px;
+  padding: clamp(12px, 2vw, 16px) clamp(18px, 3vw, 24px);
   background: rgba(20, 20, 45, 0.6);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  min-width: 90px;
-
-  @include mobile {
-    padding: 12px 18px;
-    min-width: 80px;
-    border-radius: 10px;
-  }
+  min-width: clamp(70px, 15vw, 90px);
+  flex: 1 1 auto;
+  max-width: 120px;
 
   .stat-value {
-    font-size: 24px;
+    font-size: clamp(18px, 4vw, 24px);
     font-weight: 700;
     color: #8b5cf6;
-
-    @include mobile {
-      font-size: 20px;
-    }
   }
 
   .stat-label {
-    font-size: 12px;
+    font-size: clamp(10px, 1.5vw, 12px);
     color: rgba(255, 255, 255, 0.5);
     margin-top: 4px;
-
-    @include mobile {
-      font-size: 11px;
-    }
+    text-align: center;
   }
 }
 
@@ -680,39 +634,25 @@
 // What I'm Doing Section
 .what-im-doing {
   width: 100%;
-  max-width: 1200px;
-  margin: 80px auto 0;
-  padding: 0;
-
-  @include tablet {
-    margin-top: 60px;
-  }
-
-  @include mobile {
-    margin-top: 40px;
-  }
+  max-width: min(1200px, 100%);
+  margin: clamp(40px, 8vw, 80px) auto 0;
+  padding: 0 clamp(12px, 3vw, 24px);
 
   &__title {
-    font-size: 28px;
+    font-size: clamp(22px, 4vw, 28px);
     font-weight: 600;
     color: #fff;
-    margin-bottom: 32px;
+    margin-bottom: clamp(24px, 4vw, 32px);
 
     @include mobile {
-      font-size: 24px;
       text-align: center;
     }
   }
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-
-    @include mobile {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: clamp(16px, 3vw, 24px);
   }
 }
 
@@ -720,20 +660,16 @@
   background: rgba(30, 30, 50, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 32px;
+  padding: clamp(20px, 4vw, 32px);
   text-align: center;
   transition: all 0.3s ease;
-
-  @include mobile {
-    padding: 24px;
-  }
 
   &:hover {
     background: rgba(30, 30, 50, 0.6);
   }
 
   &__icon {
-    font-size: 40px;
+    font-size: clamp(32px, 6vw, 40px);
     color: #60a5fa;
     margin-bottom: 20px;
     display: flex;
@@ -742,18 +678,20 @@
 
     svg {
       filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.3));
+      max-width: 100%;
+      height: auto;
     }
   }
 
   &__title {
-    font-size: 18px;
+    font-size: clamp(16px, 2.5vw, 18px);
     font-weight: 600;
     color: #fff;
     margin-bottom: 12px;
   }
 
   &__description {
-    font-size: 14px;
+    font-size: clamp(13px, 2vw, 14px);
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
   }

@@ -1,16 +1,36 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaArrowRight, FaPlay, FaPause } from 'react-icons/fa';
 import TechIcon from './TechIcon';
 
 /**
  * Cinematic project card — video plays as full background with glassmorphic overlay
+ * Uses IntersectionObserver to only play video when visible (saves bandwidth & battery)
  */
 const ProjectCard = ({ project, index, onClick }) => {
   const cardRef = useRef(null);
   const videoRef = useRef(null);
   const isInView = useInView(cardRef, { once: true, margin: '-60px' });
   const [isPaused, setIsPaused] = useState(false);
+
+  // Lazy-play: only run video when card is visible in viewport
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isPaused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [isPaused]);
 
   const toggleVideo = (e) => {
     e.stopPropagation();
@@ -39,10 +59,10 @@ const ProjectCard = ({ project, index, onClick }) => {
         <video
           ref={videoRef}
           src={project.video}
+          poster={project.poster || ''}
           muted
           loop
           playsInline
-          autoPlay
           preload="metadata"
           className="pcard__video"
         />

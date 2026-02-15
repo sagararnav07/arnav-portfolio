@@ -8,14 +8,30 @@
   // Padding variants
   &--small {
     padding: 16px;
+
+    @media (max-width: 738px) {
+      padding: 12px;
+    }
   }
 
   &--normal {
     padding: 24px;
+
+    @media (max-width: 738px) {
+      padding: 16px;
+    }
   }
 
   &--large {
     padding: 32px;
+
+    @media (max-width: 1024px) {
+      padding: 24px;
+    }
+
+    @media (max-width: 738px) {
+      padding: 20px;
+    }
   }
 
   // Style variants
@@ -42,5 +58,10 @@
         0 10px 40px rgba(0, 0, 0, 0.3),
         0 0 30px rgba(139, 92, 246, 0.1);
     }
+  }
+
+  // Responsive border-radius
+  @media (max-width: 738px) {
+    border-radius: 12px;
   }
 }
